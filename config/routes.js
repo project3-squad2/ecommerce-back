@@ -10,6 +10,18 @@ module.exports = require('lib/wiring/routes')
 // standards RESTful routes
 .resources('examples')
 
+//cart routes
+.resources('carts')
+.resources('monsters')
+.resources('orders')
+
+//admins
+.post('/sign-up', 'admins#signup')
+.post('/sign-in', 'admins#signin')
+.delete('/sign-out/:id', 'admins#signout')
+.patch('/change-password/:id', 'admins#changepw')
+.resources('admins', { only: ['index', 'show'] })
+
 // users of the app have special requirements
 .post('/sign-up', 'users#signup')
 .post('/sign-in', 'users#signin')
