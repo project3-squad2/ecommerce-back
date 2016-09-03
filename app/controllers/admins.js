@@ -8,7 +8,7 @@ const Admin = models.admin;
 
 const crypto = require('crypto');
 
-const authenticate = require('./concerns/authenticate');
+// const authenticate = require('./concerns/authenticate');
 
 const HttpError = require('lib/wiring/http-error');
 
@@ -53,8 +53,8 @@ const signup = (req, res, next) => {
     admin.token = token
   ).then(() =>
     new Admin(admin).save()
-  ).then(newUser => {
-    let admin = newUser.toObject();
+  ).then(newAdmin => {
+    let admin = newAdmin.toObject();
     delete admin.token;
     delete admin.passwordDigest;
     res.json({ admin });
@@ -86,7 +86,7 @@ const signout = (req, res, next) => {
   getToken().then(token =>
     Admin.findOneAndUpdate({
       _id: req.params.id,
-      token: req.currentUser.token,
+      token: req.currentAdmin.token,
     }, {
       token,
     })
@@ -95,11 +95,12 @@ const signout = (req, res, next) => {
   ).catch(next);
 };
 
+
 const changepw = (req, res, next) => {
   debug('Changing password');
   Admin.findOne({
     _id: req.params.id,
-    token: req.currentUser.token,
+    token: req.currentAdmin.token,
   }).then(admin =>
     admin ? admin.comparePassword(req.body.passwords.old) :
       Promise.reject(new HttpError(404))
@@ -119,5 +120,5 @@ module.exports = controller({
   signout,
   changepw,
 }, { before: [
-  { method: authenticate, except: ['signup', 'signin'] },
+  // { method: authenticate, except: ['signup', 'signin'] },
 ], });

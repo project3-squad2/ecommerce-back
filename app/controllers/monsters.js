@@ -2,34 +2,54 @@
 
 const controller = require('lib/wiring/controller');
 const models = require('app/models');
-const Monster = models.monster;
+const Upload = models.monster;
 
-const authenticate = require('./concerns/authenticate');
+const authenticate = require('./concerns/authenticate_admin');
+
+const s3Upload = require ('lib/aws-s3-monster');
+
+const multer  = require('multer');
+const multerUpload = multer({ dest: '/tmp/' });
+
 
 const index = (req, res, next) => {
-  Monster.find()
+  Upload.find()
     .then(monsters => res.json({ monsters }))
     .catch(err => next(err));
 };
 
 const show = (req, res, next) => {
-  Monster.findById(req.params.id)
+  Upload.findById(req.params.id)
     .then(monster => monster ? res.json({ monster }) : next())
     .catch(err => next(err));
 };
 
 const create = (req, res, next) => {
-  let monster = Object.assign(req.body.monster, {
-    _owner: req.currentUser._id,
-  });
-  Monster.create(monster)
-    .then(monster => res.json({ monster }))
-    .catch(err => next(err));
+
+
+  // let Upload = Object.assign(req.body.example, {
+  //    _owner: req.currentAdmin._id,
+  //  });
+
+
+  s3Upload(req.file)
+    .then((s3response) =>
+    Upload.create({
+      url: s3response.Location,
+      name: req.body.monster.name,
+      description: req.body.monster.description,
+      price: req.body.monster.price,
+    }))
+    // change to monster
+    .then((upload) => res.json({ upload }))
+    .catch((err) => next(err));
+
 };
+
 
 const update = (req, res, next) => {
   let search = { _id: req.params.id, _owner: req.currentUser._id };
-  Monster.findOne(search)
+  Upload.findOne(search)
     .then(monster => {
       if (!monster) {
         return next();
@@ -44,7 +64,7 @@ const update = (req, res, next) => {
 
 const destroy = (req, res, next) => {
   let search = { _id: req.params.id, _owner: req.currentUser._id };
-  Monster.findOne(search)
+  Upload.findOne(search)
     .then(monster => {
       if (!monster) {
         return next();
@@ -63,5 +83,6 @@ module.exports = controller({
   update,
   destroy,
 }, { before: [
+  { method: multerUpload.single('image[file]'), only: ['create'] },
   { method: authenticate, except: ['index', 'show'] },
 ], });

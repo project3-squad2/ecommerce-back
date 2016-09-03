@@ -3,13 +3,13 @@
 const mongoose = require('mongoose');
 
 const monsterSchema = new mongoose.Schema({
-  name: {
+    url: {
+      type: String,
+      required: true
+    },
+    name: {
       type: String,
       required: true,
-  },
-  image: {
-    type: String,
-    required: true
   },
     description: {
       type: String,
@@ -19,11 +19,6 @@ const monsterSchema = new mongoose.Schema({
       type: Number,
       required: true
     },
-  _owner: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
-    required: true,
-  },
 }, {
   timestamps: true,
   // toJSON: { virtuals: true },
