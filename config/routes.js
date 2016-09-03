@@ -23,11 +23,11 @@ module.exports = require('lib/wiring/routes')
 
 
 //admins
-// .post('/sign-up', 'admins#signup')
-// .post('/sign-in', 'admins#signin')
-// .delete('/sign-out/:id', 'admins#signout')
-// .patch('/change-password/:id', 'admins#changepw')
-// .resources('admins', { only: ['index', 'show'] })
+.post('/sign-up', 'admins#signup')
+.post('/sign-in', 'admins#signin')
+.delete('/sign-out/:id', 'admins#signout')
+.patch('/change-password/:id', 'admins#changepw')
+.resources('admins', { only: ['index', 'show'] })
 
 // users of the app have special requirements
 .post('/sign-up', 'users#signup')
