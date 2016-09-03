@@ -6,13 +6,16 @@ const Monster = require('../app/models/monster');
 const mime = require('mime');
 
 let file  = {
-  url: process.argv[2],
+  path: process.argv[2],
   name: process.argv[3],
   description: process.argv[4],
   price: process.argv[5]
 };
+
+
 file.mimetype = mime.lookup(file.path);
 file.originalname = file.path;
+
 s3Upload(file)
   .then((s3response) =>
   Monster.create({
