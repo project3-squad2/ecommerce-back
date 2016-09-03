@@ -7,7 +7,7 @@ const monsterSchema = new mongoose.Schema({
       type: String,
       required: true,
   },
-  image: {
+  url: {
     type: String,
     required: true
   },
@@ -19,11 +19,6 @@ const monsterSchema = new mongoose.Schema({
       type: Number,
       required: true
     },
-  _owner: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
-    required: true,
-  },
 }, {
   timestamps: true,
   // toJSON: { virtuals: true },
