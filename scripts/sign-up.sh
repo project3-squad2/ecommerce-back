@@ -1,14 +1,14 @@
 #!/bin/bash
 
-curl --include --request POST http://localhost:3000/sign-up \
-  --header "Content-Type: application/json" \
-  --data '{
-    "credentials": {
-      "email": "peic.natasa@gmail.com",
-      "password": "123",
-      "password_confirmation": "123"
-    }
-  }'
+# curl --include --request POST http://localhost:3000/sign-up \
+#   --header "Content-Type: application/json" \
+#   --data '{
+#     "credentials": {
+#       "email": "peic.natasa@gmail.com",
+#       "password": "123",
+#       "password_confirmation": "123"
+#     }
+#   }'
 
 # curl --include --request POST http://localhost:3000/sign-up \
 #   --header "Content-Type: application/json" \
@@ -35,3 +35,16 @@ curl --include --request POST http://localhost:3000/sign-up \
 # Connection: keep-alive
 #
 # {"admin":{"__v":0,"updatedAt":"2016-09-02T21:42:12.109Z","createdAt":"2016-09-02T21:42:12.109Z","email":"peic.natasa@gmail.com","_id":"57c9f234b715d94a6b2d0765"}}
+
+
+
+
+curl --include --request POST http://localhost:3000/sign-up \
+  --header "Content-Type: application/json" \
+  --data '{
+    "credentials": {
+      "email": "natasa@gmail.com",
+      "password": "123",
+      "password_confirmation": "123"
+    }
+  }'

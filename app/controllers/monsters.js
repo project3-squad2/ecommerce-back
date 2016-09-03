@@ -4,7 +4,7 @@ const controller = require('lib/wiring/controller');
 const models = require('app/models');
 const Upload = models.monster;
 
-// const authenticate = require('./concerns/authenticate');
+const authenticate = require('./concerns/authenticate_admin');
 
 const s3Upload = require ('lib/aws-s3-monster');
 
@@ -25,6 +25,13 @@ const show = (req, res, next) => {
 };
 
 const create = (req, res, next) => {
+
+
+  // let Upload = Object.assign(req.body.example, {
+  //    _owner: req.currentAdmin._id,
+  //  });
+
+
   s3Upload(req.file)
     .then((s3response) =>
     Upload.create({
@@ -77,5 +84,5 @@ module.exports = controller({
   destroy,
 }, { before: [
   { method: multerUpload.single('image[file]'), only: ['create'] },
-  // { method: authenticate, except: ['index', 'show'] },
+  { method: authenticate, except: ['index', 'show'] },
 ], });

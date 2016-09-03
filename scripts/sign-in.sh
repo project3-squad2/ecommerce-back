@@ -24,3 +24,14 @@ curl --include --request POST http://localhost:3000/sign-in \
   # Connection: keep-alive
   #
   # {"admin":{"_id":"57c9f234b715d94a6b2d0765","updatedAt":"2016-09-02T21:52:41.023Z","createdAt":"2016-09-02T21:42:12.109Z","email":"peic.natasa@gmail.com","token":"pumzAzJtosLBqg1A2IbQwTGS9PKiCSqNBNB05n9/WB4=--3DNBfh45GTyEW95A3kfcSWKYk2ovuciaGVWq7I+n6FQ=","__v":0}}~/wdi/projects/ecommerce-back (models)$
+
+
+  # curl --include --request POST http://localhost:3000/sign-in \
+  #   --header "Content-Type: application/json" \
+  #   --data '{
+  #     "credentials": {
+  #       "email": "natasa@gmail.com",
+  #       "password": "123",
+  #       "password_confirmation": "123"
+  #     }
+  #   }'
