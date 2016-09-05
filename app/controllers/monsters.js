@@ -2,7 +2,7 @@
 
 const controller = require('lib/wiring/controller');
 const models = require('app/models');
-const Upload = models.monster;
+const Monster = models.monster;
 
 const authenticate = require('./concerns/authenticate_admin');
 
@@ -13,13 +13,13 @@ const multerUpload = multer({ dest: '/tmp/' });
 
 
 const index = (req, res, next) => {
-  Upload.find()
+  Monster.find()
     .then(monsters => res.json({ monsters }))
     .catch(err => next(err));
 };
 
 const show = (req, res, next) => {
-  Upload.findById(req.params.id)
+  Monster.findById(req.params.id)
     .then(monster => monster ? res.json({ monster }) : next())
     .catch(err => next(err));
 };
@@ -34,14 +34,14 @@ const create = (req, res, next) => {
 
   s3Upload(req.file)
     .then((s3response) =>
-    Upload.create({
+    Monster.create({
       url: s3response.Location,
       name: req.body.monster.name,
       description: req.body.monster.description,
       price: req.body.monster.price,
     }))
     // change to monster
-    .then((upload) => res.json({ upload }))
+    .then((monster) => res.json({ monster}))
     .catch((err) => next(err));
 
 };
@@ -49,7 +49,7 @@ const create = (req, res, next) => {
 
 const update = (req, res, next) => {
   let search = { _id: req.params.id, _owner: req.currentUser._id };
-  Upload.findOne(search)
+  Monster.findOne(search)
     .then(monster => {
       if (!monster) {
         return next();
@@ -64,7 +64,7 @@ const update = (req, res, next) => {
 
 const destroy = (req, res, next) => {
   let search = { _id: req.params.id, _owner: req.currentUser._id };
-  Upload.findOne(search)
+  Monster.findOne(search)
     .then(monster => {
       if (!monster) {
         return next();
