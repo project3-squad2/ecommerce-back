@@ -16,8 +16,9 @@ module.exports = require('lib/wiring/routes')
 .resources('orders')
 
 // added get
-.post('/monsters', 'monsters#create')
-.get('/monsters', 'monsters#index')
+// .post('/monsters', 'monsters#create')
+// .get('/monsters', 'monsters#index')
+.resources('monsters')
 
 
 
