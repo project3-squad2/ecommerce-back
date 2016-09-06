@@ -14,12 +14,16 @@ module.exports = require('lib/wiring/routes')
 .resources('carts')
 // .resources('monsters')
 .resources('orders')
+.resources('charge')
+.resources('monsters')
 
 // added get
 // .post('/monsters', 'monsters#create')
 // .get('/monsters', 'monsters#index')
-.resources('monsters')
-
+// .get('/owner_orders/:owner', 'orders#showUserOrders')
+// .get('/owner_carts/:owner', 'carts#showUserCarts')
+// .post('/charge', 'orders#createCharge')
+.post('/orders', 'orders#create')
 
 
 
