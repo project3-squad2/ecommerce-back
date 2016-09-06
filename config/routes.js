@@ -23,7 +23,7 @@ module.exports = require('lib/wiring/routes')
 // .get('/owner_orders/:owner', 'orders#showUserOrders')
 // .get('/owner_carts/:owner', 'carts#showUserCarts')
 // .post('/charge', 'orders#createCharge')
-.post('/orders', 'orders#create')
+// .post('/orders', 'orders#create')
 
 
 
