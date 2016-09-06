@@ -4,7 +4,7 @@ const controller = require('lib/wiring/controller');
 const models = require('app/models');
 const Monster = models.monster;
 
-const authenticate = require('./concerns/authenticate_admin');
+// const authenticate = require('./concerns/authenticate_admin');
 
 const s3Upload = require ('lib/aws-s3-monster');
 
@@ -25,13 +25,6 @@ const show = (req, res, next) => {
 };
 
 const create = (req, res, next) => {
-
-
-  // let Upload = Object.assign(req.body.example, {
-  //    _owner: req.currentAdmin._id,
-  //  });
-
-
   s3Upload(req.file)
     .then((s3response) =>
     Monster.create({
@@ -48,7 +41,8 @@ const create = (req, res, next) => {
 
 
 const update = (req, res, next) => {
-  let search = { _id: req.params.id, _owner: req.currentUser._id };
+  // let search = { _id: req.params.id, _owner: req.currentUser._id };
+    let search = { _id: req.params.id };
   Monster.findOne(search)
     .then(monster => {
       if (!monster) {
@@ -63,7 +57,8 @@ const update = (req, res, next) => {
 };
 
 const destroy = (req, res, next) => {
-  let search = { _id: req.params.id, _owner: req.currentUser._id };
+  // let search = { _id: req.params.id, _owner: req.currentUser._id };
+  let search = { _id: req.params.id };
   Monster.findOne(search)
     .then(monster => {
       if (!monster) {
@@ -83,6 +78,6 @@ module.exports = controller({
   update,
   destroy,
 }, { before: [
-  { method: multerUpload.single('image[file]'), only: ['create'] },
-  { method: authenticate, except: ['index', 'show'] },
+  { method: multerUpload.single('monster[file]'), only: ['create'] },
+  // { method: authenticate, except: ['index', 'show'] },
 ], });
