@@ -20,12 +20,12 @@ module.exports = require('lib/wiring/routes')
 // added get
 // .post('/monsters', 'monsters#create')
 // .get('/monsters', 'monsters#index')
-// .get('/owner_orders/:owner', 'orders#showUserOrders')
+.get('/owner_orders/:owner', 'orders#index')
 // .get('/owner_carts/:owner', 'carts#showUserCarts')
-// .post('/charge', 'orders#createCharge')
+.post('/charge', 'orders#createCharge')
 // .post('/orders', 'orders#create')
 
-
+// .get('orders/:id' , 'orders#index')
 
 // shut down for now
 //admins

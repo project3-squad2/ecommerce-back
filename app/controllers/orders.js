@@ -8,10 +8,17 @@ const authenticate = require('./concerns/authenticate');
 const stripe = require("stripe")("sk_test_KGNyovPQfoyqwrT3kENSnM8j");
 
 const index = (req, res, next) => {
-  Order.find()
+  Order.find({
+    _owner: req.params.owner, })
     .then(orders => res.json({ orders }))
     .catch(err => next(err));
 };
+
+// const index = (req, res, next) => {
+//   Order.find()
+//     .then(orders => res.json({ orders }))
+//     .catch(err => next(err));
+// };
 
 const show = (req, res, next) => {
   Order.findById(req.params.id)
@@ -108,3 +115,6 @@ module.exports = controller({
 }, { before: [
   { method: authenticate, except: ['index', 'show'] },
 ], });
+// }, { before: [
+//   { method: authenticate, except: ['index', 'show'] },
+// ], });
