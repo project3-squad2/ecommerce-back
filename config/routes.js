@@ -12,37 +12,14 @@ module.exports = require('lib/wiring/routes')
 
 //cart routes
 .resources('carts')
-// .resources('monsters')
 .resources('orders')
 .resources('charge')
 .resources('monsters')
 
-// added get
-// .post('/monsters', 'monsters#create')
-// .get('/monsters', 'monsters#index')
+
 .get('/owner_orders/:owner', 'orders#index')
-// .get('/owner_carts/:owner', 'carts#showUserCarts')
 .post('/charge', 'orders#createCharge')
-// .post('/orders', 'orders#create')
 
-// .get('orders/:id' , 'orders#index')
-
-// shut down for now
-
-//admins
-// .post('/sign-up', 'admins#signup')
-// .post('/sign-in', 'admins#signin')
-// .delete('/sign-out/:id', 'admins#signout')
-// .patch('/change-password/:id', 'admins#changepw')
-// .resources('admins', { only: ['index', 'show'] })
-
-// added get
-// .post('/monsters', 'monsters#create')
-// .get('/monsters', 'monsters#index')
-// .get('/owner_orders/:owner', 'orders#showUserOrders')
-// .get('/owner_carts/:owner', 'carts#showUserCarts')
-// .post('/charge', 'orders#createCharge')
-// .post('/orders', 'orders#create')
 
 // users of the app have special requirements
 .post('/sign-up', 'users#signup')
@@ -52,13 +29,4 @@ module.exports = require('lib/wiring/routes')
 .resources('users', { only: ['index', 'show'] })
 
 
-// shut down for now
-
-
-
-
-
-
-
-// all routes created
 ;

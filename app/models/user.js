@@ -28,6 +28,7 @@ const uniqueValidator = require('mongoose-unique-validator');
  // updatedAt
  // :
  // "2016-09-06T15:53:33.363Z"
+
  // password: 1
 
 

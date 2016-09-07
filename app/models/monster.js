@@ -21,12 +21,8 @@ const monsterSchema = new mongoose.Schema({
     },
 }, {
   timestamps: true,
-  // toJSON: { virtuals: true },
 });
 
-// monsterSchema.virtual('length').get(function length() {
-//   return this.text.length;
-// });
 
 const Monster = mongoose.model('Monster', monsterSchema);
 
