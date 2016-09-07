@@ -5,8 +5,10 @@ const models = require('app/models');
 const Order = models.order;
 
 const authenticate = require('./concerns/authenticate');
+// stripe key
 const stripe = require("stripe")("sk_test_KGNyovPQfoyqwrT3kENSnM8j");
 
+// our index
 const index = (req, res, next) => {
   Order.find({
     _owner: req.params.owner, })
@@ -14,6 +16,7 @@ const index = (req, res, next) => {
     .catch(err => next(err));
 };
 
+// example index
 // const index = (req, res, next) => {
 //   Order.find()
 //     .then(orders => res.json({ orders }))
@@ -43,11 +46,6 @@ const create = (req, res, next) => {
 
 
 
-
-
-
-
-// review asap
 const showUserOrders = (req, res, next) => {
  Order.find({
    _owner: req.params.owner,
@@ -57,21 +55,15 @@ const showUserOrders = (req, res, next) => {
 };
 
 
-
-const createCharge = (req, res, next) => {
- stripe.charges.create({
-   amount: req.body.amount,
-   currency: "usd",
-   source: req.body.stripeToken,
- }).then(charge => res.json({ charge }))
- .catch(err => next(err));
-};
-
-
-
-
-
-
+// working on it
+// const createCharge = (req, res, next) => {
+//  stripe.charges.create({
+//    amount: req.body.amount,
+//    currency: "usd",
+//    source: req.body.stripeToken,
+//  }).then(charge => res.json({ charge }))
+//  .catch(err => next(err));
+// };
 
 
 
@@ -111,7 +103,7 @@ module.exports = controller({
   update,
   destroy,
   showUserOrders,
-  createCharge
+  // createCharge
 }, { before: [
   { method: authenticate, except: ['index', 'show'] },
 ], });

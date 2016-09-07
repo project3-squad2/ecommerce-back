@@ -41,6 +41,7 @@ const create = (req, res, next) => {
 
 
 const update = (req, res, next) => {
+  // for admin update
   // let search = { _id: req.params.id, _owner: req.currentUser._id };
     let search = { _id: req.params.id };
   Monster.findOne(search)
@@ -57,6 +58,7 @@ const update = (req, res, next) => {
 };
 
 const destroy = (req, res, next) => {
+  // for admin delete
   // let search = { _id: req.params.id, _owner: req.currentUser._id };
   let search = { _id: req.params.id };
   Monster.findOne(search)
@@ -64,12 +66,12 @@ const destroy = (req, res, next) => {
       if (!monster) {
         return next();
       }
-
       return monster.remove()
         .then(() => res.sendStatus(200));
     })
     .catch(err => next(err));
 };
+
 
 module.exports = controller({
   index,
