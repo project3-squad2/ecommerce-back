@@ -26,12 +26,7 @@ const cartSchema = new mongoose.Schema({
   },
 }, {
   timestamps: true,
-  // toJSON: { virtuals: true },
 });
-
-// cartSchema.virtual('length').get(function length() {
-//   return this.text.length;
-// });
 
 const Cart = mongoose.model('Cart', cartSchema);
 
